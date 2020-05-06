@@ -21,7 +21,7 @@ namespace Analyzer.Infrastructure.Commands
             return Files;
         }
 
-        public void SetOutputFile(OutputFileContent content, Guid Identifier)
+        public void SetOutputFile(OutputFileContent content, Guid Identifier, string FilePath)
         {
 
             string path = Path.Combine(PathUtil.GetOutputPathMonitor(), Identifier.ToString() + ".txt");
@@ -35,16 +35,31 @@ namespace Analyzer.Infrastructure.Commands
             {
 
                 string key = String.Join("-", new String[]
-                { 
-                    content.CustomerQuantity.ToString(), 
-                    content.IdMostExpansiveSale.ToString(), 
-                    content.SellerQuantity.ToString(), 
-                    content.WorstSeller 
+                {
+                    content.CustomerQuantity.ToString(),
+                    content.IdMostExpansiveSale.ToString(),
+                    content.SellerQuantity.ToString(),
+                    content.WorstSeller
                 });
- 
+
                 Byte[] title = new UTF8Encoding(true).GetBytes(key);
                 fs.Write(title, 0, title.Length);
             }
+
+            CreateBackup(FilePath, Identifier);
+        }
+        private static void CreateBackup(string input, Guid identifier)
+        {
+            string originalPath = input;
+            string DestinationPath = Path.Combine(PathUtil.GetBackupPath(), identifier.ToString() + ".txt");
+
+            File.Copy(originalPath, DestinationPath);
+
+
+            //Delete from original folder     
+            if (File.Exists(originalPath))
+                File.Delete(originalPath);
+
         }
     }
 }

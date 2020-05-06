@@ -11,16 +11,35 @@ namespace Analyzer.CrossCutting.Lib.Util
         public static string GetInputPathMonitor()
         {
             var dir = GetBasePath();
+            dir = Path.Combine(dir, "Analyzer/Analyzer.Infrastructure/Data/in");
 
-            return Path.Combine(dir, "Analyzer/Analyzer.Infrastructure/Data/in");
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
+
+            return dir;
         }
 
         public static string GetOutputPathMonitor()
         {
             var dir = GetBasePath();
+            dir = Path.Combine(dir, "Analyzer/Analyzer.Infrastructure/Data/out");
+
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
 
             //Assuming Test is your Folder
-            return Path.Combine(dir, "Analyzer/Analyzer.Infrastructure/Data/out");
+            return dir;
+        }
+
+        public static string GetBackupPath()
+        {
+            var dir = GetBasePath();
+            dir = Path.Combine(dir, "Analyzer/Analyzer.Infrastructure/Data/backup");
+
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
+
+            return dir;
         }
 
         private static string GetBasePath()

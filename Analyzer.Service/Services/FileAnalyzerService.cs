@@ -27,7 +27,7 @@ namespace Analyzer.Core.Services
         {
             FileContent content = GetInputData(file);
             OutputFileContent outputFileContent = new OutputFileContent(content);
-            SetOutputData(outputFileContent, content.Identifier);
+            SetOutputData(outputFileContent, content.Identifier, file);
         }
 
         private static void Classificate(ref FileContent content, string type, string[] keys)
@@ -75,10 +75,10 @@ namespace Analyzer.Core.Services
             return content;
         }
 
-        private static void SetOutputData(OutputFileContent content, Guid Identifier)
+        private static void SetOutputData(OutputFileContent content, Guid Identifier,FileInfo file)
         {  //init object
             FileAnalyzerData fileAnalyzer = new FileAnalyzerData();
-            fileAnalyzer.SetOutputFile(content, Identifier);
+            fileAnalyzer.SetOutputFile(content, Identifier,file.FullName);
         }
     }
 }

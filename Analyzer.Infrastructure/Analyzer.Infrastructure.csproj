@@ -6,7 +6,12 @@
 
   <ItemGroup>
     <Folder Include="Data\in\" />
+    <Folder Include="Data\backup\" />
     <Folder Include="Data\out\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.8" />
   </ItemGroup>
 
   <ItemGroup>

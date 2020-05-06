@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Analyzer.CrossCutting.Lib.Util;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace Analyzer.Api.Controllers
 {
@@ -22,29 +23,29 @@ namespace Analyzer.Api.Controllers
         [Route("upload")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Upload(List<IFormFile> files)
+        public IActionResult Upload(List<IFormFile> files)
         {
-
-            string wwwPath = this.Environment.WebRootPath;
-            string contentPath = this.Environment.ContentRootPath;
-
-            string path = Path.Combine(this.Environment.WebRootPath, "Uploads");
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-
-            List<string> uploadedFiles = new List<string>();
-            foreach (IFormFile postedFile in files)
+            try
             {
+                string path = PathUtil.GetInputPathMonitor();
 
-                string fileName = Path.GetFileName(postedFile.FileName);
-                using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                List<string> uploadedFiles = new List<string>();
+                foreach (IFormFile postedFile in files)
                 {
-                    postedFile.CopyTo(stream);
-                    uploadedFiles.Add(fileName);
+                    string fileName = Path.GetFileName(postedFile.FileName);
+                    using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                    {
+                        postedFile.CopyTo(stream);
+                        uploadedFiles.Add(fileName);
+                    }
                 }
-            }
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
     }
 }
