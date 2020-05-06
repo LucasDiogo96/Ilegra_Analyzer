@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Analyzer.Core.Services;
 using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +23,6 @@ namespace API
             services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("HangfireMonitor")));
             services.AddHangfireServer();
 
-
             services.AddControllers();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
         }
@@ -47,6 +42,12 @@ namespace API
 
             //Hangfire application monitor
             app.UseHangfireDashboard();
+
+            //Start Hanfire background service
+            RecurringJob.AddOrUpdate(
+                () => FileAnalyzerService.Init(),
+              Cron.Minutely);
+
 
             #endregion
 

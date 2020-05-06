@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analyzer.Infrastructure", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analyzer.UI", "Analyzer.Adm\Analyzer.UI.csproj", "{BD69689B-3A26-4B3C-B195-1F17C54908BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analyzer.Service", "Analyzer.Service\Analyzer.Service.csproj", "{6B91BB6D-ED1F-499A-8220-4ECC02EC9898}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{BD69689B-3A26-4B3C-B195-1F17C54908BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD69689B-3A26-4B3C-B195-1F17C54908BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD69689B-3A26-4B3C-B195-1F17C54908BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B91BB6D-ED1F-499A-8220-4ECC02EC9898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B91BB6D-ED1F-499A-8220-4ECC02EC9898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B91BB6D-ED1F-499A-8220-4ECC02EC9898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B91BB6D-ED1F-499A-8220-4ECC02EC9898}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

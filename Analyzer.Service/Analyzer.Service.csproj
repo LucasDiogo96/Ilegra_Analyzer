@@ -5,13 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\in\" />
-    <Folder Include="Data\out\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Analyzer.Core\Analyzer.Core.csproj" />
-    <ProjectReference Include="..\Analyzer.CrossCutting\Analyzer.CrossCutting.csproj" />
+    <ProjectReference Include="..\Analyzer.Infrastructure\Analyzer.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

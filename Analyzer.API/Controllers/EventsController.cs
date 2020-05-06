@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Hangfire;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Analyzer.Api.Controllers
 {
@@ -11,6 +8,20 @@ namespace Analyzer.Api.Controllers
     [ApiController]
     public class EventsController : ControllerBase
     {
-        
+        [HttpGet]
+        [Route("Monitoring")]
+        public IActionResult Create()
+        {
+            try
+            {
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+ 
     }
 }
