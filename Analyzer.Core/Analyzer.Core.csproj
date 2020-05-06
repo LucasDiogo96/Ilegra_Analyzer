@@ -5,10 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
     <Folder Include="Events\" />
     <Folder Include="Handlers\" />
     <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Analyzer.CrossCutting\Analyzer.CrossCutting.csproj" />
   </ItemGroup>
 
 </Project>
