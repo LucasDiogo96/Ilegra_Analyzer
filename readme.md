@@ -35,15 +35,26 @@ dotnet run -p Analyzer.API.csproj
 
 4. Acesse a URL da demo através do seu browser
 
+```
  https://localhost:5001/hangfire
+```
+## Notas
+
+ * Para fins de monitoramento dos denominados jobs da aplicação, foi utilizado o Hangfire onde é fornecida uma interface para acompanhamento e histórico dos processos ocorridos de leitura dos arquivos.
+
+ * Com a finalidade de se ter um controle ainda maior sobre a aplicação, o Serilog está sendo utilizado para registrar qualquer erro que ocorra no sistema e salvando-os em uma base NoSQL MongoDB.
+
+  * Para futuras integrações, foi desenvolvido um endpoint assíncrono preparada para receber arquivos e salva-los para recorrente leitura do monitor.
+  
+  * Ambas as bases NoSQL estão rodando em um cluster em nuvem no MongoDB Atlas
 
 
 ## Bibliotecas de desenvolvimento
 
-* [.Net Code 3.1](https://dotnet.microsoft.com/download) - Framework utilizado para construção da aplicação
-* [MongoDB](https://www.mongodb.com/) - Utilzado como base de logs e de processos para o Hangfire
-* [Hangfire](https://www.hangfire.io/) - Usado para monitorar os processos da aplicação
-* [Serilog](https://serilog.net/) - Utilizado como framework para registro de logs
+* [.Net Code 3.1](https://dotnet.microsoft.com/download) - Framework utilizado para construção da aplicação.
+* [MongoDB](https://www.mongodb.com/) - Utilzado como base de logs e de processos para o Hangfire.
+* [Hangfire](https://www.hangfire.io/) - Usado para monitorar os processos da aplicação.
+* [Serilog](https://serilog.net/) - Utilizado como framework para registro de logs.
 
 
 ## Autor
