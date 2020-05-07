@@ -22,7 +22,6 @@ namespace Analyzer.Infrastructure.Repository
                 Byte[] title = new UTF8Encoding(true).GetBytes(Content);
                 fs.Write(title, 0, title.Length);
             }
-
         }
         /// <summary>
         /// Read files from input directory

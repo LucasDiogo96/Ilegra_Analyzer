@@ -1,17 +1,19 @@
-﻿using Analyzer.Core.Interfaces.Repository;
+﻿using Analyzer.Core.Entities;
+using Analyzer.Core.Interfaces.Repository;
 using Analyzer.CrossCutting.Lib.Util;
 using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Analyzer.Infrastructure.Repository
 {
     public class OutputRepository : IRepository
-    {
-        /// Save File
-        /// </summary>
-        /// <param name="Path"></param>
+
+    {  /// Save File
+       /// </summary>
+       /// <param name="Path"></param>
         public void Add(string FileName, string Content)
         {
             // Create a new file     
@@ -20,6 +22,20 @@ namespace Analyzer.Infrastructure.Repository
                 Byte[] title = new UTF8Encoding(true).GetBytes(Content);
                 fs.Write(title, 0, title.Length);
             }
+        }
+
+        public async void Add(string FileName, OutputFileContent content)
+        {
+            // Create a new file     
+            await using (StreamWriter sw = File.CreateText(Path.Combine(PathUtil.GetOutputPathMonitor(), FileName)))
+            {
+                sw.WriteLine("Sales report.");
+                sw.WriteLine("Customer quantity: {0}", content.CustomerQuantity);
+                sw.WriteLine("Sellers quantity: {0}", content.SellerQuantity);
+                sw.WriteLine("Most expensive sale Id: {0}", content.IdMostExpansiveSale);
+                sw.WriteLine("Worst seller: {0}", content.WorstSeller);
+            }
+
         }
 
         /// <summary>

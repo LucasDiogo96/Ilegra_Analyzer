@@ -133,17 +133,9 @@ namespace Analyzer.Core.Services
         /// <param name="file"></param>
         private static void Save(OutputFileContent content, FileInfo file)
         {
-            IRepository _InputRepository = new OutputRepository();
+            OutputRepository _InputRepository = new OutputRepository();
 
-            string key = String.Join("-", new String[]
-                {
-                    content.CustomerQuantity.ToString(),
-                    content.IdMostExpansiveSale.ToString(),
-                    content.SellerQuantity.ToString(),
-                    content.WorstSeller
-                });
-
-            _InputRepository.Add(content.Identifier.ToString() + ".txt", key);
+            _InputRepository.Add(content.Identifier.ToString() + ".txt", content);
         }
     }
 }
