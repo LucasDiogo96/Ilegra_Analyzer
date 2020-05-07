@@ -11,7 +11,7 @@ namespace Analyzer.CrossCutting.Lib.Util
         public static string GetInputPathMonitor()
         {
             var dir = GetBasePath();
-            dir = Path.Combine(dir, "Analyzer/Analyzer.Infrastructure/Data/in");
+            dir = Path.Combine(dir, "Analyzer/Data/in");
 
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
@@ -22,7 +22,7 @@ namespace Analyzer.CrossCutting.Lib.Util
         public static string GetOutputPathMonitor()
         {
             var dir = GetBasePath();
-            dir = Path.Combine(dir, "Analyzer/Analyzer.Infrastructure/Data/out");
+            dir = Path.Combine(dir, "Analyzer/Data/out");
 
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
@@ -46,6 +46,12 @@ namespace Analyzer.CrossCutting.Lib.Util
         {
             var enviroment = System.Environment.CurrentDirectory;
             return Directory.GetParent(enviroment).Parent.FullName;
+        }
+
+
+        public static string[] ExtractInformation(FileInfo file)
+        {
+            return System.IO.File.ReadAllLines(file.FullName);
         }
     }
 }
