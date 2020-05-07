@@ -2,64 +2,51 @@
 
 O sistema desenvolvido com fins de teste para o processo seletivo tem o objetivo analisar dados de venda que irá importar lotes de arquivos e produzir um relatório baseado em informações presentes no mesmo.
 
-## Getting Started
+## Iniciando
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Essas instruções fornecerão uma cópia do projeto em execução na sua máquina local para fins de desenvolvimento e teste. Consulte implantação para obter notas sobre como implantar o projeto em um sistema ativo.
 
-### Prerequisites
+### Pré-requisitos
 
-What things you need to install the software and how to install them
+- Visual Studio 2019 instalado ou Visual Studio Code
+- .NET Core 3.1
 
-```
-Give examples
-```
+### Instalação
 
-### Installing
+Para rodar o projeto siga os passos a baixo
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+1. Clone o repositório através do comando 
 
 ```
 git clone https://github.com/LucasDiogo96/Ilegra_Analyzer.git
 ```
 
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+2. Acesse o diretório clonado no passo anterior
 
 ```
-Give an example
+cd folder
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
+3. Execute o comando
 
 ```
-Give an example
+dotnet run -p Analyzer.API.csproj
 ```
 
-## Deployment
+4. Acesse a URL da demo através do seu browser
 
-Add additional notes about how to deploy this on a live system
+ https://localhost:5001/hangfire
 
-## Built With
 
-* [.Net Code 3.1](https://dotnet.microsoft.com/download)
+## Bibliotecas de desenvolvimento
+
+* [.Net Code 3.1](https://dotnet.microsoft.com/download) - Framework utilizado para construção da aplicação
 * [MongoDB](https://www.mongodb.com/) - Utilzado como base de logs e de processos para o Hangfire
 * [Hangfire](https://www.hangfire.io/) - Usado para monitorar os processos da aplicação
 * [Serilog](https://serilog.net/) - Utilizado como framework para registro de logs
 
 
-## Authors
+## Autor
 
-* **Lucas Diogo da Silva** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Lucas Diogo da Silva** - [Github](https://github.com/LucasDiogo96)
 
