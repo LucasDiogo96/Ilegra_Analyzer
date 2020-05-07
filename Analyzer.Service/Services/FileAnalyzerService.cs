@@ -29,16 +29,20 @@ namespace Analyzer.Core.Services
             {
                 //init object
                 IRepository _InputRepository = new InputRepository();
-                //Get files from path
-                FileInfo[] files = _InputRepository.GetAll();
 
-                //Extract information by each one
-                foreach (var item in files)
+                if (_InputRepository.HasFiles())
                 {
-                    AnalyzeFile(item);
+                    //Get files from path
+                    FileInfo[] files = _InputRepository.GetAll();
 
-                    _InputRepository.BackupFile(item.FullName);
-                    _InputRepository.DeleteFile(item.FullName);
+                    //Extract information by each one
+                    foreach (var item in files)
+                    {
+                        AnalyzeFile(item);
+
+                        _InputRepository.BackupFile(item.FullName);
+                        _InputRepository.DeleteFile(item.FullName);
+                    }
                 }
             }
             catch (Exception e)

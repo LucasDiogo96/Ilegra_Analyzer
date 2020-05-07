@@ -8,5 +8,8 @@ namespace Analyzer.Core.Interfaces.Repository
         public FileInfo[] GetAll();
         public void DeleteFile(string FilePath);
         public void BackupFile(string FilePath);
+
+        public bool HasFiles();
+
     }
 }

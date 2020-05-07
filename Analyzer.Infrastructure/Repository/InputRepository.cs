@@ -3,6 +3,7 @@ using Analyzer.CrossCutting.Lib.Util;
 using Hangfire.Annotations;
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Analyzer.Infrastructure.Repository
@@ -59,6 +60,11 @@ namespace Analyzer.Infrastructure.Repository
             if (File.Exists(DestinationPath))
                 File.Copy(FilePath, DestinationPath, true);
 
+        }
+
+        public bool HasFiles()
+        {
+            return Directory.EnumerateFileSystemEntries(PathUtil.GetInputPathMonitor()).Any();
         }
     }
 }
