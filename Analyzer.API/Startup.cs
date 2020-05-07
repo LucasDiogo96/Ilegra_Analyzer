@@ -70,7 +70,7 @@ namespace API
             //10 seg interval to call the recurrent job
             RecurringJob.AddOrUpdate(
                 () => analyzerService.Start(),
-              "*/10 * * * * *");
+              "*/5 * * * * *");
 
             app.UseSerilogRequestLogging();
 
