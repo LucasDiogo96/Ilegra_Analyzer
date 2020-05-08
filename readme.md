@@ -24,13 +24,16 @@ git clone https://github.com/LucasDiogo96/Ilegra_Analyzer.git
 2. Acesse o diretório clonado no passo anterior
 
 ```
-cd folder
+cd Ilegra_Analyzer
 ```
 
-3. Execute o comando
+3. Execute os comandos
 
 ```
-dotnet run -p Analyzer.API.csproj
+dotnet build
+```
+```
+dotnet run --project Analyzer.API/Analyzer.API.csproj
 ```
 
 4. Acesse a URL da demo através do seu browser
