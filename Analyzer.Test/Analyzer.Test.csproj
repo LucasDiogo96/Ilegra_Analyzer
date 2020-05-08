@@ -7,9 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hangfire.Core" Version="1.7.11" />
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0"/>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Analyzer.API\Analyzer.API.csproj" />
+    <ProjectReference Include="..\Analyzer.Core\Analyzer.Core.csproj" />
+    <ProjectReference Include="..\Analyzer.CrossCutting\Analyzer.CrossCutting.csproj" />
+    <ProjectReference Include="..\Analyzer.Service\Analyzer.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Test.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
 
 </Project>

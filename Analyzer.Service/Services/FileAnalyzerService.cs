@@ -8,18 +8,12 @@ using Analyzer.Infrastructure.Repository;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Analyzer.Core.Services
 {
     public class FileAnalyzerService : IFileAnalyzerService
     {
-
-        //private readonly ILogger<FileAnalyzerService> _logger;
-        //public FileAnalyzerService(ILogger<FileAnalyzerService> logger)
-        //{
-        //    _logger = logger;
-        //}
-
         /// <summary>
         /// Hangfire service start point
         /// </summary>
@@ -36,20 +30,25 @@ namespace Analyzer.Core.Services
                     FileInfo[] files = _InputRepository.GetAll();
 
                     //Extract information by each one
-                    foreach (var item in files)
+                    Parallel.ForEach(files, item =>
                     {
-                        AnalyzeFile(item);
+                        OutputFileContent outputFileContent = AnalyzeFile(item);
 
+                        //save 
+                        Save(outputFileContent, item);
+                        //create backup
                         _InputRepository.BackupFile(item.FullName);
+                        //delete from input folder
                         _InputRepository.DeleteFile(item.FullName);
-                    }
+                    });
+
                 }
             }
             catch (Exception e)
             {
                 //_logger.LogError(e, e.Message);
                 //throw to hangfire
-                throw;
+
             }
         }
 
@@ -57,14 +56,13 @@ namespace Analyzer.Core.Services
         /// Analyze file content
         /// </summary>
         /// <param name="file"></param>
-        private static void AnalyzeFile(FileInfo file)
+        private static OutputFileContent AnalyzeFile(FileInfo file)
         {
             FileContent content = ParseToFileContent(file);
 
             OutputFileContent outputFileContent = new OutputFileContent(content);
 
-            Save(outputFileContent, file);
-
+            return outputFileContent;
         }
 
         /// <summary>

@@ -52,13 +52,11 @@ namespace Analyzer.Infrastructure.Repository
         /// <param name="FilePath"></param>
         public void BackupFile(string FilePath)
         {
-            string FileName = Guid.NewGuid().ToString() + DateTime.Now.ToString() + ".txt";
+            string FileName = Guid.NewGuid().ToString() + ".txt";
 
             string DestinationPath = Path.Combine(PathUtil.GetBackupPath(), FileName);
 
-            if (File.Exists(DestinationPath))
-                File.Copy(FilePath, DestinationPath, true);
-
+            File.Copy(FilePath, DestinationPath, true);
         }
 
         public bool HasFiles()

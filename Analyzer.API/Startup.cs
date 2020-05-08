@@ -67,7 +67,7 @@ namespace API
 
             //Start Hanfire background service
 
-            //10 seg interval to call the recurrent job
+            //5 seg interval to call the recurrent job
             RecurringJob.AddOrUpdate(
                 () => analyzerService.Start(),
               "*/5 * * * * *");
