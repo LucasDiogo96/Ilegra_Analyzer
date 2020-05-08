@@ -24,11 +24,11 @@ namespace Analyzer.Infrastructure.Repository
             }
         }
 
-        public async void AddFile(OutputFileContent content)
+        public void AddFile(OutputFileContent content)
         {
             string FileName = content.Identifier.ToString() + ".txt";
             // Create a new file     
-            await using (StreamWriter sw = File.CreateText(Path.Combine(PathUtil.GetOutputPathMonitor(), FileName)))
+            using (StreamWriter sw = File.CreateText(Path.Combine(PathUtil.GetOutputPathMonitor(), FileName)))
             {
                 sw.WriteLine("Sales report.");
                 sw.WriteLine("Customer quantity: {0}", content.CustomerQuantity);
