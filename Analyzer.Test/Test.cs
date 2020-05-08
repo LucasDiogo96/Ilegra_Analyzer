@@ -48,9 +48,10 @@ namespace Analyzer.Test
                 sw.WriteLine("001Á3245678865434ÁPauloÁ40000.99");
                 sw.WriteLine("001Á3245678865434ÁLucasÁ40000.99");
                 sw.WriteLine("002Á2345675434544345ÁJose da SilvaÁRural");
-                sw.WriteLine("002Á2345675433444345ÁEduardo PereiraÁRural");
-                sw.WriteLine("003Á08Á[1-34-10,2-33-1.50,3-40-0.10]ÁPaulo");
-                sw.WriteLine("003Á08Á[1-34-10,2-33-1.50,3-40-0.10]ÁPedro");
+                sw.WriteLine("002Á2345675434544345ÁJose PereiraÁRural");
+                sw.WriteLine("002Á04270435062ÁJose PereiraÁRural");
+                sw.WriteLine("003Á07Á[1-34-10,2-33-1.50,3-40-0.10]ÁPaulo");
+                sw.WriteLine("003Á08Á[1-34-10,2-33-1.50,3-40-0.10]ÁLucas");
 
             }
 
@@ -91,7 +92,8 @@ namespace Analyzer.Test
                         sw.WriteLine("001Á3245678865434ÁPauloÁ40000.99");
                         sw.WriteLine("002Á2345675434544345ÁJose da SilvaÁRural");
                         sw.WriteLine("002Á2345675433444345ÁEduardo PereiraÁRural");
-                        sw.WriteLine("003Á08Á[1-34-10,2-33-1.50,3-40-0.10]ÁPaulo");
+                        sw.WriteLine("003Á08Á[1-34-10,2-33-200.50,3-40-0.10]ÁPaulo");
+                        sw.WriteLine("003Á08Á[1-34-10,2-33-2000.50,3-40-0.10]ÁPaulo");
                     }
                 }
             });

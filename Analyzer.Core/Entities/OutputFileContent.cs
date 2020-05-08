@@ -23,10 +23,22 @@ namespace Analyzer.Core.Entities
                                     Amount = g.Sum(g => g.Amount)
                                 }).OrderBy(c => c.Amount).FirstOrDefault().Seller;
 
-            //set customer quantity
-            this.CustomerQuantity = content.Customers.Count;
-            //set sellet quantity
-            this.SellerQuantity = content.Sellers.Count;
+            //set customer quantity group by document
+            this.CustomerQuantity = (from p in content.Customers
+                                     group p by p.Identity into g
+                                     select new
+                                     {
+                                         Identity = g.Key,
+                                     }).Count();
+
+
+            //set sellers quantity group by document
+            this.SellerQuantity = (from p in content.Sellers
+                                   group p by p.Identity into g
+                                   select new
+                                   {
+                                       Identity = g.Key,
+                                   }).Count();
         }
 
         public Guid Identifier { get; private set; }

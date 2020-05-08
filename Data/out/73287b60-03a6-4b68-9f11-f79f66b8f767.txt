@@ -1,0 +1,5 @@
+Sales report.
+Customer quantity: 2
+Sellers quantity: 2
+Most expensive sale Id: 7
+Worst seller: Paulo
