@@ -1,10 +1,10 @@
 ﻿using Analyzer.Core.Entities;
 using Analyzer.Core.Enums;
 using Analyzer.Core.Interfaces.Repository;
-using Analyzer.Core.Interfaces.Service;
 using Analyzer.CrossCutting.Lib.Extensions;
 using Analyzer.CrossCutting.Lib.Util;
 using Analyzer.Infrastructure.Repository;
+using Hangfire;
 using System;
 using System.IO;
 using System.Linq;
@@ -12,12 +12,14 @@ using System.Threading.Tasks;
 
 namespace Analyzer.Core.Services
 {
-    public class FileAnalyzerService : IFileAnalyzerService
+    public class FileAnalyzerService
     {
         /// <summary>
         /// Hangfire service start point
         /// </summary>
-        public void Start()
+        /// 
+        [DisableConcurrentExecution(5)]
+        public void Execute()
         {
             try
             {
@@ -26,16 +28,19 @@ namespace Analyzer.Core.Services
 
                 if (_InputRepository.HasFiles())
                 {
+                    OutputRepository _outputRepository = new OutputRepository();
+
                     //Get files from path
                     FileInfo[] files = _InputRepository.GetAll();
 
                     //Extract information by each one
                     Parallel.ForEach(files, item =>
                     {
+
                         OutputFileContent outputFileContent = AnalyzeFile(item);
 
-                        //save 
-                        Save(outputFileContent, item);
+                        //Save file in output diretory
+                        _outputRepository.AddFile(outputFileContent);
                         //create backup
                         _InputRepository.BackupFile(item.FullName);
                         //delete from input folder
@@ -44,11 +49,15 @@ namespace Analyzer.Core.Services
 
                 }
             }
+            catch (IOException e)
+            {
+                //_logger.LogError(e, e.Message);
+                //throw to hangfire
+            }
             catch (Exception e)
             {
                 //_logger.LogError(e, e.Message);
                 //throw to hangfire
-
             }
         }
 
@@ -121,19 +130,6 @@ namespace Analyzer.Core.Services
                 default:
                     break;
             }
-        }
-
-        /// <summary>
-        /// Save content
-        /// </summary>
-        /// <param name="content"></param>
-        /// <param name="Identifier"></param>
-        /// <param name="file"></param>
-        private static void Save(OutputFileContent content, FileInfo file)
-        {
-            OutputRepository _InputRepository = new OutputRepository();
-
-            _InputRepository.Add(content.Identifier.ToString() + ".txt", content);
         }
     }
 }

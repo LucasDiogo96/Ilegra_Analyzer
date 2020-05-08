@@ -1,8 +1,10 @@
-﻿namespace Analyzer.Core.Interfaces.Service
+﻿using Hangfire.Server;
+
+namespace Analyzer.Core.Interfaces.Service
 {
     public interface IFileAnalyzerService
     {
-        public void Start();
+        public void Start(BackgroundProcessContext context);
     }
-   
+
 }

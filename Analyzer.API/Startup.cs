@@ -38,7 +38,6 @@ namespace API
 
                 config.UseMongoStorage(Configuration.GetConnectionString("HangfireDatabase"), storageOptions);
 
-                services.AddSingleton<IFileAnalyzerService, FileAnalyzerService>();
             });
 
             services.AddHangfireServer();
@@ -63,14 +62,13 @@ namespace API
             app.UseHangfireDashboard();
 
 
-            IFileAnalyzerService analyzerService = new FileAnalyzerService();
+            FileAnalyzerService analyzerService = new FileAnalyzerService();
 
-            //Start Hanfire background service
 
             //5 seg interval to call the recurrent job
             RecurringJob.AddOrUpdate(
-                () => analyzerService.Start(),
-              "*/5 * * * * *");
+                () => analyzerService.Execute(),
+              "*/10 * * * * *");
 
             app.UseSerilogRequestLogging();
 

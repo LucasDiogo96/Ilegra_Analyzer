@@ -24,8 +24,9 @@ namespace Analyzer.Infrastructure.Repository
             }
         }
 
-        public async void Add(string FileName, OutputFileContent content)
+        public async void AddFile(OutputFileContent content)
         {
+            string FileName = content.Identifier.ToString() + ".txt";
             // Create a new file     
             await using (StreamWriter sw = File.CreateText(Path.Combine(PathUtil.GetOutputPathMonitor(), FileName)))
             {

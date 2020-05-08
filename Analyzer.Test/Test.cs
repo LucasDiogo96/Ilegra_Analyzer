@@ -14,7 +14,6 @@ namespace Analyzer.Test
     public class Tests
     {
         Logger log;
-        IFileAnalyzerService service;
 
         [SetUp]
         public void Setup()
@@ -27,7 +26,6 @@ namespace Analyzer.Test
            .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Verbose)
            .CreateLogger();
             //initialize service
-            service = new FileAnalyzerService();
         }
 
         /// <summary>
@@ -52,7 +50,6 @@ namespace Analyzer.Test
             try
             {
                 log.Information("File inserted");
-                service.Start();
             }
             catch (Exception e)
             {
@@ -94,7 +91,6 @@ namespace Analyzer.Test
             try
             {
                 log.Information("Files inserted");
-                service.Start();
             }
             catch (Exception e)
             {
