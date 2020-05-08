@@ -14,10 +14,15 @@ namespace Analyzer.Core.Services
 {
     public class FileAnalyzerService
     {
-        /// <summary>
-        /// Hangfire service start point
-        /// </summary>
-        /// 
+        Serilog.Core.Logger _logger;
+
+        public FileAnalyzerService()
+        {
+            LoggerExtension logger = new LoggerExtension();
+            _logger = logger.CreateLogger();
+        }
+
+
         [DisableConcurrentExecution(5)]
         public void Execute()
         {
@@ -48,8 +53,14 @@ namespace Analyzer.Core.Services
 
                 }
             }
-            catch (IOException) { }
-            catch (Exception) { }
+            catch (IOException ex)
+            {
+                _logger.Error(ex, "An error is ocurred");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "An error is ocurred");
+            }
         }
 
         /// <summary>

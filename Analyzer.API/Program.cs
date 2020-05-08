@@ -1,3 +1,4 @@
+using Analyzer.CrossCutting.Lib.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -12,17 +13,8 @@ namespace API
         public static void Main(string[] args)
         {
             #region Serilog configuration
-            var config = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json", optional: false)
-            .Build();
-
-            Log.Logger = new LoggerConfiguration()
-           .MinimumLevel.Debug()
-           .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-           .Enrich.FromLogContext()
-           .WriteTo.Console()
-           .WriteTo.MongoDB(config.GetConnectionString("DatabaseLogger"), collectionName:"logs")
-           .CreateLogger();
+            LoggerExtension logger = new LoggerExtension();
+            logger.CreateLogger();
 
             CreateHostBuilder(args).Build().Run();
             #endregion
