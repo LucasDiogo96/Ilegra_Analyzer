@@ -36,7 +36,6 @@ namespace Analyzer.Core.Services
                     //Extract information by each one
                     Parallel.ForEach(files, item =>
                     {
-
                         OutputFileContent outputFileContent = AnalyzeFile(item);
 
                         //Save file in output diretory
@@ -49,16 +48,8 @@ namespace Analyzer.Core.Services
 
                 }
             }
-            catch (IOException e)
-            {
-                //_logger.LogError(e, e.Message);
-                //throw to hangfire
-            }
-            catch (Exception e)
-            {
-                //_logger.LogError(e, e.Message);
-                //throw to hangfire
-            }
+            catch (IOException) { }
+            catch (Exception) { }
         }
 
         /// <summary>

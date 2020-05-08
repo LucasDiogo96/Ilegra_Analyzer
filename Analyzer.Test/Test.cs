@@ -14,10 +14,14 @@ namespace Analyzer.Test
     public class Tests
     {
         Logger log;
+        FileAnalyzerService _service;
 
         [SetUp]
         public void Setup()
         {
+            // create new service instance
+            _service = new FileAnalyzerService();
+
             ///setting enviroment to test project
             var projectPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\"));
             System.Environment.CurrentDirectory = projectPath;
@@ -40,16 +44,20 @@ namespace Analyzer.Test
 
             using (StreamWriter sw = File.CreateText(Path.Combine(PathUtil.GetInputPathMonitor(), "TestFile" + ".txt")))
             {
-                sw.WriteLine("001Á1234567891234ÁPedroÁ50000");
+                sw.WriteLine("001Á1234567891234ÁPedroÁ20000");
                 sw.WriteLine("001Á3245678865434ÁPauloÁ40000.99");
+                sw.WriteLine("001Á3245678865434ÁLucasÁ40000.99");
                 sw.WriteLine("002Á2345675434544345ÁJose da SilvaÁRural");
                 sw.WriteLine("002Á2345675433444345ÁEduardo PereiraÁRural");
                 sw.WriteLine("003Á08Á[1-34-10,2-33-1.50,3-40-0.10]ÁPaulo");
+                sw.WriteLine("003Á08Á[1-34-10,2-33-1.50,3-40-0.10]ÁPedro");
+
             }
 
             try
             {
                 log.Information("File inserted");
+                _service.Execute();
             }
             catch (Exception e)
             {
@@ -91,6 +99,8 @@ namespace Analyzer.Test
             try
             {
                 log.Information("Files inserted");
+                _service.Execute();
+
             }
             catch (Exception e)
             {

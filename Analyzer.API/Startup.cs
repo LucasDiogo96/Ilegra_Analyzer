@@ -65,10 +65,10 @@ namespace API
             FileAnalyzerService analyzerService = new FileAnalyzerService();
 
 
-            //5 seg interval to call the recurrent job
+            //10 seg interval to call the recurrent job
             RecurringJob.AddOrUpdate(
                 () => analyzerService.Execute(),
-              "*/10 * * * * *");
+              "*/5 * * * * *");
 
             app.UseSerilogRequestLogging();
 
