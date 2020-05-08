@@ -55,7 +55,7 @@ namespace Analyzer.Core.Services
             }
             catch (IOException ex)
             {
-                _logger.Error(ex, "An error is ocurred");
+                _logger.Error(ex, "An I/O error is ocurred");
             }
             catch (Exception ex)
             {
