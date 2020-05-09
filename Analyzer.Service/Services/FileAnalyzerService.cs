@@ -23,7 +23,7 @@ namespace Analyzer.Core.Services
         }
 
 
-        [DisableConcurrentExecution(5)]
+        [DisableConcurrentExecution(timeoutInSeconds: 10 * 60)]
         public void Execute()
         {
             try
@@ -42,6 +42,9 @@ namespace Analyzer.Core.Services
                     Parallel.ForEach(files, item =>
                     {
                         OutputFileContent outputFileContent = AnalyzeFile(item);
+
+                        //log the processed information
+                        _logger.Information($"Processed file {item.FullName} output: {Serializer.Serialize(outputFileContent)}");
 
                         //Save file in output diretory
                         _outputRepository.AddFile(outputFileContent);

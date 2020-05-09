@@ -1,4 +1,3 @@
-using Analyzer.Core.Interfaces.Service;
 using Analyzer.Core.Services;
 using Hangfire;
 using Hangfire.Mongo;
@@ -65,7 +64,7 @@ namespace API
             FileAnalyzerService analyzerService = new FileAnalyzerService();
 
 
-            //10 seg interval to call the recurrent job
+            //5 seg interval to call the recurrent job
             RecurringJob.AddOrUpdate(
                 () => analyzerService.Execute(),
               "*/5 * * * * *");
