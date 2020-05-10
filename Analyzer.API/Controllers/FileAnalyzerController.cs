@@ -34,19 +34,22 @@ namespace Analyzer.Api.Controllers
                 if (!files.Any())
                     return BadRequest();
 
-
                 string path = PathUtil.GetInputPathMonitor();
 
-                List<string> uploadedFiles = new List<string>();
-                foreach (IFormFile postedFile in files)
+                //save files asynchronously
+                var t = Task.Run(() =>
                 {
-                    string fileName = Path.GetFileName(postedFile.FileName);
-                    using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                    List<string> uploadedFiles = new List<string>();
+                    foreach (IFormFile postedFile in files)
                     {
-                        postedFile.CopyTo(stream);
-                        uploadedFiles.Add(fileName);
+                        string fileName = Path.GetFileName(postedFile.FileName);
+                        using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                        {
+                            postedFile.CopyTo(stream);
+                            uploadedFiles.Add(fileName);
+                        }
                     }
-                }
+                }).ConfigureAwait(false);
 
                 return Ok();
             }
