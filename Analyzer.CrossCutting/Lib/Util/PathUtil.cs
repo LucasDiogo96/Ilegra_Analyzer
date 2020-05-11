@@ -27,7 +27,17 @@ namespace Analyzer.CrossCutting.Lib.Util
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
 
-            //Assuming Test is your Folder
+            return dir;
+        }
+
+        public static string GetRejectedPathMonitor()
+        {
+            var dir = GetBasePath();
+            dir = Path.Combine(dir, "Analyzer/Data/rejected");
+
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
+
             return dir;
         }
 

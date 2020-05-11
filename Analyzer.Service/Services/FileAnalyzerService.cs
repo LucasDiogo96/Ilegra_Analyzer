@@ -41,7 +41,22 @@ namespace Analyzer.Core.Services
                     //Extract information by each one
                     Parallel.ForEach(files, item =>
                     {
-                        OutputFileContent outputFileContent = AnalyzeFile(item);
+                        OutputFileContent outputFileContent = null;
+
+                        try
+                        {
+                            //try parse files
+                            outputFileContent = AnalyzeFile(item);
+                        }
+                        catch (Exception ex)
+                        {
+                            //Move to rejected folder if has error to parse
+                            _InputRepository.RejectFile(item);
+                            _logger.Error(ex, $"The file {item.Name} cannot be converted and has been moved to the rejected folder.");
+
+                            //move to next interaction
+                            return;
+                        }
 
                         //log the processed information
                         _logger.Information($"Processed file {item.FullName} output: {Serializer.Serialize(outputFileContent)}");

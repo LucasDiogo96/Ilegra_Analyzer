@@ -79,5 +79,18 @@ namespace Analyzer.Infrastructure.Repository
         {
             return Directory.EnumerateFileSystemEntries(PathUtil.GetOutputPathMonitor()).Any();
         }
+
+        public Task RejectFile(FileInfo rejectedfile)
+        {
+            var t = Task.Run(() =>
+            {
+                string DestinationPath = Path.Combine(PathUtil.GetRejectedPathMonitor(), rejectedfile.Name);
+
+                File.Move(rejectedfile.FullName, DestinationPath, true);
+            });
+            t.ConfigureAwait(false);
+
+            return t;
+        }
     }
 }

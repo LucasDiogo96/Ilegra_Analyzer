@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Analyzer.Infrastructure.Repository
 {
@@ -62,6 +63,19 @@ namespace Analyzer.Infrastructure.Repository
         public bool HasFiles()
         {
             return Directory.EnumerateFileSystemEntries(PathUtil.GetInputPathMonitor()).Any();
+        }
+
+        public Task RejectFile(FileInfo rejectedfile)
+        {
+            var t = Task.Run(() =>
+            {
+                string DestinationPath = Path.Combine(PathUtil.GetRejectedPathMonitor(), rejectedfile.Name);
+
+                File.Move(rejectedfile.FullName, DestinationPath, true);
+            });
+            t.ConfigureAwait(false);
+
+            return t;
         }
     }
 }
