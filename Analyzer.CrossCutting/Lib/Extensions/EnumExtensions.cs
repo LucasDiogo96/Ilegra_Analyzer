@@ -25,7 +25,7 @@ namespace Analyzer.CrossCutting.Lib.Extensions
                 else
                     return value.ToString();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //LogUtil.Error(ex);
                 return value.ToString();
@@ -65,7 +65,7 @@ namespace Analyzer.CrossCutting.Lib.Extensions
                     return (T)(Enum.GetValues(typeof(T)).GetValue(0));
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //LogUtil.Error(ex);
                 return (T)(Enum.GetValues(typeof(T)).GetValue(0));
@@ -87,7 +87,7 @@ namespace Analyzer.CrossCutting.Lib.Extensions
                     return (T)(Enum.GetValues(typeof(T)).GetValue(0));
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //LogUtil.Error(ex);
                 return (T)(Enum.GetValues(typeof(T)).GetValue(0));
@@ -100,7 +100,7 @@ namespace Analyzer.CrossCutting.Lib.Extensions
             {
                 return (T)Enum.Parse(typeof(T), nome.Replace(" ", ""), true);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //LogUtil.Error(ex);
                 return (T)(Enum.GetValues(typeof(T)).GetValue(0));
@@ -114,7 +114,7 @@ namespace Analyzer.CrossCutting.Lib.Extensions
             {
                 return EnumExtensions.GetItens<T>().FirstOrDefault(x => x.Description() == nome);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //LogUtil.Error(ex);
                 return (T)(Enum.GetValues(typeof(T)).GetValue(0));

@@ -26,7 +26,7 @@ namespace Analyzer.Api.Controllers
         [Route("upload")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Upload(List<IFormFile> files)
+        public IActionResult Upload(List<IFormFile> files)
         {
             try
             {
